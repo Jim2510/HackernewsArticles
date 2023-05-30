@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <h1>HACKERNEWS ARTICLES</h1>
+    </header>
+
+    <div class="container-news">
+        <div class="news" id="news-list"></div>
+    </div>
+
+    <div class="sticky-buttons">
+        <button id="refBtn" class="refresh-button" onclick="refreshPage()"><box-icon name='refresh'></box-icon></button>
+        <button id="topBtn" class="scroll-top-button" onclick="scrollToTop()"><box-icon type='solid'
+                name='chevrons-up'></box-icon></button>
+    </div>
+
+    <script src="dist/bundle.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+
+</body>
+
+</html>
