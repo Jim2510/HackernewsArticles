@@ -1,23 +1,32 @@
+// Importa le librerie necessarie
 import axios from 'axios';
 import _ from 'lodash';
 import 'boxicons';
 
+// URL di base per l'API di Hacker News
 const baseUrl = 'https://hacker-news.firebaseio.com/v0';
 
-let currentPage = 1;
-let loading = false;
+// Variabili globali
+let currentPage = 1; // Pagina corrente
+let loading = false; // Flag per indicare se il caricamento è in corso
 
+// Funzione asincrona per ottenere le ultime notizie
 async function getLatestNews() {
+    // Ottiene l'elenco degli ID delle ultime notizie
     const response = await axios.get(`${baseUrl}/newstories.json`);
     const newsIds = response.data.slice((currentPage - 1) * 10, currentPage * 10);
+
+    // Ottiene i dettagli delle notizie corrispondenti agli ID
     const newsDetailsPromises = newsIds.map(async (id) => {
         const newsResponse = await axios.get(`${baseUrl}/item/${id}.json`);
         return newsResponse.data;
     });
+
     const newsDetails = await Promise.all(newsDetailsPromises);
     return newsDetails;
 }
 
+// Funzione per rendere la lista di notizie
 function renderNewsList(newsDetails) {
     const newsItems = [];
 
@@ -43,34 +52,47 @@ function renderNewsList(newsDetails) {
     return newsItems;
 }
 
+// Funzione asincrona per caricare ulteriori notizie
 async function loadMoreNews() {
+    // Controlla se il caricamento è già in corso
     if (!loading) {
         loading = true;
         currentPage++;
+
+        // Ottiene i dettagli delle notizie
         const newsDetails = await getLatestNews();
+
         if (newsDetails.length > 0) {
+            // Rende e aggiunge gli elementi delle notizie alla lista
             const newsItems = renderNewsList(newsDetails);
             const container = document.querySelector('.news');
             newsItems.forEach((newsItem) => {
                 container.appendChild(newsItem);
             });
+
             loading = false;
-            createObserver(); // Aggiungi l'Observer per le nuove news caricate
+            createObserver(); // Aggiungi l'Observer per le nuove notizie caricate
         } else {
+            // Rimuovi l'event listener dello scroll se non ci sono più notizie da caricare
             window.removeEventListener('scroll', scrollHandler);
         }
     }
 }
 
+// Gestore dello scroll
 function scrollHandler() {
+    // Controlla se l'utente ha raggiunto la fine della pagina e non ci sono caricamenti in corso
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight && !loading) {
         loadMoreNews();
     }
 
+    // Controlla la visibilità degli elementi delle notizie
     const newsItems = document.querySelectorAll('.news-item');
     newsItems.forEach((newsItem) => {
         if (isElementVisible(newsItem)) {
             newsItem.classList.add('visible');
+
+            // Controlla se l'elemento è sopra o sotto la viewport
             if (isElementAboveViewport(newsItem)) {
                 newsItem.classList.remove('fade-in');
             } else {
@@ -82,11 +104,13 @@ function scrollHandler() {
     });
 }
 
+// Controlla se l'elemento è sopra la viewport
 function isElementAboveViewport(element) {
     const rect = element.getBoundingClientRect();
     return rect.bottom < 0;
 }
 
+// Controlla se l'elemento è visibile nella viewport
 function isElementVisible(element) {
     const rect = element.getBoundingClientRect();
     return (
@@ -95,12 +119,16 @@ function isElementVisible(element) {
     );
 }
 
+// Aggiunge l'event listener per lo scroll con un throttling
 window.addEventListener('scroll', _.throttle(scrollHandler, 500));
 
+// Funzione di inizializzazione
 async function init() {
+    // Ottiene i dettagli delle ultime notizie
     const newsDetails = await getLatestNews();
-    const newsItems = renderNewsList(newsDetails);
 
+    // Rende e aggiunge gli elementi delle notizie alla lista
+    const newsItems = renderNewsList(newsDetails);
     const container = document.querySelector('.news');
     newsItems.forEach((newsItem, index) => {
         if (index < 10) {
@@ -109,9 +137,10 @@ async function init() {
         container.appendChild(newsItem);
     });
 
-    createObserver();
+    createObserver(); // Aggiungi l'Observer per le nuove notizie caricate
 }
 
+// Crea l'Intersection Observer per la visibilità degli elementi
 function createObserver() {
     const newsItems = document.querySelectorAll('.news-item');
 
@@ -123,6 +152,8 @@ function createObserver() {
 
                 if (isVisible) {
                     entry.target.classList.add('visible');
+
+                    // Controlla se l'elemento è sopra o sotto la viewport
                     if (isAboveViewport) {
                         entry.target.classList.remove('fade-in');
                     } else {
@@ -142,9 +173,9 @@ function createObserver() {
     });
 }
 
-init();
+init(); // Inizializza l'applicazione
 
-const refBtn = document.getElementById('refBtn');
+// Gestore del click sul pulsante "Torna all'inizio"
 const topBtn = document.getElementById('topBtn');
 
 function scrollToTop() {
@@ -153,15 +184,17 @@ function scrollToTop() {
         behavior: 'smooth',
     });
 }
-
 topBtn.addEventListener('click', scrollToTop);
+
+// Gestore del click sul pulsante "Aggiorna pagina"
+const refBtn = document.getElementById('refBtn');
 
 function refPage() {
     location.reload();
 }
-
 refBtn.addEventListener('click', refPage);
 
+// Riduci l'altezza dell'header quando si fa lo scroll
 const header = document.querySelector('header');
 const scrollOffset = 100; // Offset di scroll dopo il quale l'header si riduce in altezza
 
