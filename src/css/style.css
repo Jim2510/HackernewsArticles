@@ -238,6 +238,11 @@ a {
 
 @media (max-width: 600px) {
 
+    .icn {
+        width: 30px;
+        height: 30px;
+    }
+
     header h1 {
         font-size: 22px;
     }
@@ -257,6 +262,11 @@ a {
     }
 
     .scroll-top-button {
+        width: 50px;
+        height: 50px;
+    }
+
+    .gitBtn {
         width: 50px;
         height: 50px;
     }
