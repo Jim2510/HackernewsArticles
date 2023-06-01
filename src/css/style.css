@@ -123,6 +123,7 @@ a {
     padding: 2px;
 }
 
+
 /* Stile per visualizzare una notizia */
 .news-item.visible {
     opacity: 1;
@@ -155,11 +156,6 @@ a {
     transform: scale(1.2);
     background-color: #fff;
     transition: transform 0.5s ease-in-out, color 0.3s ease-in-out, background-color 0.6s ease-in-out;
-}
-
-/* Stile al click su una notizia */
-.news-item:active {
-    box-shadow: inset 0px 0px 28px 10px rgba(10, 7, 218, 0.596);
 }
 
 /* Stile al passaggio del mouse sul titolo di una notizia */
@@ -339,12 +335,12 @@ a {
     }
 
     .container-news {
-        width: 75%;
+        width: 80%;
     }
 
     .news-item {
-        max-width: 250px;
-        height: 120px;
+        max-width: 280px;
+        height: 150px;
     }
 
     .refresh-button {

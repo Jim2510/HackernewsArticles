@@ -33,6 +33,7 @@ function renderNewsList(newsDetails) {
     newsDetails.forEach((news) => {
         const newsItem = document.createElement('div');
         newsItem.classList.add('news-item');
+        newsItem.dataset.category = news.category; // Assumi che la categoria dell'articolo sia disponibile come proprietà "category" nell'oggetto "news"
 
         const title = document.createElement('a');
         title.classList.add('news-title');
@@ -51,6 +52,7 @@ function renderNewsList(newsDetails) {
 
     return newsItems;
 }
+
 
 // Funzione asincrona per caricare ulteriori notizie
 async function loadMoreNews() {
