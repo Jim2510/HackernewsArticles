@@ -9,24 +9,47 @@
 
 /* Stile del body */
 body {
-    background-color: rgb(31, 109, 255);
+    background-color: rgb(239, 244, 253);
 }
 
 /* Stile dell'header */
 header {
-    height: 100px;
+    height: 120px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
     align-items: center;
     background-color: #000000;
     font-family: 'Poppins', sans-serif;
     color: #fff;
     z-index: 999;
+    padding: 20px;
 }
+
+header h1 {
+    font-size: 40px;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.search {
+    display: flex;
+    height: 2rem;
+    width: 260px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: bolder;
+    border: none;
+    padding: 8px;
+    border-radius: 20px;
+}
+
 
 /* Stile del contenitore delle notizie */
 .container-news {
@@ -36,8 +59,8 @@ header {
     flex-direction: column;
     font-family: 'Poppins', sans-serif;
     width: 800px;
-    margin: 120px auto;
-    background-color: rgba(4, 0, 255, 0.329);
+    margin: 140px auto;
+    background-color: rgb(4, 0, 255);
     padding-top: 30px;
     border-radius: 20px;
 }
@@ -69,7 +92,7 @@ a {
     max-width: 650px;
     min-height: 100px;
     flex-direction: row;
-    background-color: rgba(255, 255, 255, 0.877);
+    background-color: rgb(224, 224, 224);
     backdrop-filter: blur(10px);
     position: relative;
     opacity: 0;
@@ -128,10 +151,10 @@ a {
 
 /* Stile al passaggio del mouse su una notizia */
 .news-item:hover {
-    border: 1px solid rgba(31, 0, 168, 0.534);
+    border: 1px solid rgba(31, 0, 168, 0.253);
     transform: scale(1.2);
-    box-shadow: inset 0px 0px 28px 10px rgba(93, 91, 175, 0.486);
-    transition: box-shadow 0.3s ease-in, transform 0.5s ease-in-out, color 0.3s ease-in-out, box-shadow 0.5s ease-in-out;
+    background-color: #fff;
+    transition: transform 0.5s ease-in-out, color 0.3s ease-in-out, background-color 0.6s ease-in-out;
 }
 
 /* Stile al click su una notizia */
@@ -174,6 +197,8 @@ a {
     border-radius: 50%;
     width: 80px;
     height: 80px;
+    -webkit-box-shadow: 0px 1px 8px 2px #000000;
+    box-shadow: 0px 1px 8px 2px #000000;
 }
 
 /* Stile del pulsante di scroll verso l'alto */
@@ -182,17 +207,19 @@ a {
     border-radius: 50%;
     width: 80px;
     height: 80px;
+    -webkit-box-shadow: 0px 1px 8px 2px #000000;
+    box-shadow: 0px 1px 8px 2px #000000;
 }
 
 /* Stile al passaggio del mouse sul pulsante di scroll verso l'alto */
 .scroll-top-button:hover {
-    background-color: #2e10d6;
+    background-color: rgb(4, 0, 255);
     transition: background .5s ease-in-out;
 }
 
 /* Stile al passaggio del mouse sul pulsante di aggiornamento pagina */
 .refresh-button:hover {
-    background-color: #2e10d6;
+    background-color: rgb(4, 0, 255);
     transition: background .5s ease-in-out;
 }
 
@@ -214,10 +241,12 @@ a {
     background-color: #fff;
     border-radius: 50%;
     border: none;
+    -webkit-box-shadow: 0px 1px 8px 2px #000000;
+    box-shadow: 0px 1px 8px 2px #000000;
 }
 
 .gitBtn:hover {
-    background-color: #2e10d6;
+    background-color: rgb(4, 0, 255);
     transition: background .5s ease-in-out;
 }
 
@@ -226,7 +255,67 @@ a {
     height: 50px;
 }
 
+/* Stile della barra di scorrimento */
+::-webkit-scrollbar {
+    width: 11px;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    /* Larghezza della barra di scorrimento */
+}
+
+/* Stile del cursore della barra di scorrimento */
+::-webkit-scrollbar-thumb {
+    background-color: rgb(4, 0, 255);
+    /* Colore del cursore */
+    border-radius: 5px;
+    /* Raggio dei bordi del cursore */
+}
+
+/* Stile del cursore della barra di scorrimento al passaggio del mouse */
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(3, 0, 161);
+    transition: all 0.3s ease-in-out;
+    /* Colore del cursore al passaggio del mouse */
+}
+
+/* Stile della traccia della barra di scorrimento */
+::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* Colore della traccia */
+}
+
+/* Stile della traccia della barra di scorrimento al passaggio del mouse */
+::-webkit-scrollbar-track:hover {
+    background-color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    /* Colore della traccia al passaggio del mouse */
+}
+
+/* Stile dei pulsanti di fine barra di scorrimento */
+::-webkit-scrollbar-button {
+    display: none;
+    /* Nascondi i pulsanti di fine barra di scorrimento */
+}
+
+
+
 @media (max-width: 900px) {
+
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header h1 {
+        position: static;
+        transform: none;
+        margin-bottom: 10px;
+    }
+
+    .search {
+        margin: 0;
+    }
 
     .container-news {
         width: 70%;

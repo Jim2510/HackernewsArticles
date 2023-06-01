@@ -175,6 +175,27 @@ function createObserver() {
 
 init(); // Inizializza l'applicazione
 
+// Aggiungi un evento di ascolto per il campo di input
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', performSearch);
+
+function performSearch() {
+    const searchQuery = searchInput.value.trim().toLowerCase(); // Ottieni il testo di ricerca e convertilo in minuscolo
+    const newsItems = document.querySelectorAll('.news-item'); // Ottieni tutti gli elementi delle notizie
+
+    newsItems.forEach((newsItem) => {
+        const title = newsItem.querySelector('.news-title'); // Ottieni l'elemento del titolo della notizia
+        const newsTitle = title.textContent.toLowerCase(); // Ottieni il testo del titolo e convertilo in minuscolo
+
+        // Controlla se il testo di ricerca corrisponde al titolo della notizia
+        if (newsTitle.includes(searchQuery)) {
+            newsItem.style.display = 'flex'; // Mostra l'elemento delle notizie se c'è corrispondenza
+        } else {
+            newsItem.style.display = 'none'; // Nascondi l'elemento delle notizie se non c'è corrispondenza
+        }
+    });
+}
+
 // Gestore del click sul pulsante "Torna all'inizio"
 const topBtn = document.getElementById('topBtn');
 
@@ -205,3 +226,15 @@ window.addEventListener('scroll', () => {
         header.classList.remove('sticky-header', 'small');
     }
 });
+
+function filterNews(category) {
+    const newsItems = document.querySelectorAll('.news-item');
+
+    newsItems.forEach((newsItem) => {
+        if (category === 'all' || newsItem.dataset.category === category) {
+            newsItem.style.display = 'block';
+        } else {
+            newsItem.style.display = 'none';
+        }
+    });
+}

@@ -10,8 +10,11 @@
 </head>
 
 <body>
+
     <header>
         <h1>HACKERNEWS ARTICLES</h1>
+        <input class="search" type="text" id="searchInput" placeholder="Cerca tra le notizie caricate">
+
     </header>
 
     <div class="container-news">
@@ -19,10 +22,10 @@
     </div>
 
     <div class="sticky-buttons">
-        <button id="refBtn" class="refresh-button" onclick="refreshPage()"><box-icon class="icn"
-                name='refresh'></box-icon></button>
-        <button id="topBtn" class="scroll-top-button" onclick="scrollToTop()"><box-icon class="icn" type='solid'
-                name='chevrons-up'></box-icon></button>
+        <button id="refBtn" class="refresh-button" onclick="refreshPage()"><box-icon class="icn" name='refresh'
+                animation='spin'></box-icon></button>
+        <button id="topBtn" class="scroll-top-button" onclick="scrollToTop()"><box-icon class="icn" name='chevrons-up'
+                type='solid'></box-icon></box-icon></button>
     </div>
     <div class="stickylinks">
         <button class="gitBtn"><a href="https://github.com/Jim2510/HackernewsArticles"><box-icon class="icn"
